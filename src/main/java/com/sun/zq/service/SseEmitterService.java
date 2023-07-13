@@ -17,7 +17,6 @@ public interface SseEmitterService {
     /**
      * 关闭连接
      * @param clientId
-     * @param message
      */
     void closeSession(String clientId);
 }
