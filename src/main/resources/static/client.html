@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE轻量化服务端消息推送方案实现</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<h1>SSE轻量化服务端消息推送方案实现</h1>
+<div>SSE测试</div>
+<div id="sse"></div>
+</body>
+</html>
+<script>
+    var clientId;
+    var text;
+    var source = new EventSource('http://localhost:8080/sse/test/start');
+    source.onmessage = function (event) {
+        text = document.getElementById('sse').innerText;
+        text = event.data;
+        document.getElementById('sse').innerText = text;
+        console.log(event.data);
+        clientId = event.lastEventId;
+    };
+    source.onerror = function (e) {
+        if (e.readyState == EventSource.CLOSED) {
+            console.log('连接已关闭');
+        }
+    };
+    source.onopen = function (e) {
+        console.log(e);
+    };
+
+    window.addEventListener("beforeunload", function (e) {
+        closeSession();
+    });
+    function closeSession() {
+        source.close();
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.open("GET", "http://localhost:8080/sse/test/close?clientId" + clientId, true);
+        xmlHttpRequest.send();
+        console.log("closeSession")
+    }
+
+
+</script>
