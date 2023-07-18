@@ -33,16 +33,5 @@
         console.log(e);
     };
 
-    window.addEventListener("beforeunload", function (e) {
-        closeSession();
-    });
-    function closeSession() {
-        source.close();
-        var xmlHttpRequest = new XMLHttpRequest();
-        xmlHttpRequest.open("GET", "http://localhost:8080/sse/test/close?clientId" + clientId, true);
-        xmlHttpRequest.send();
-        console.log("closeSession")
-    }
-
 
 </script>

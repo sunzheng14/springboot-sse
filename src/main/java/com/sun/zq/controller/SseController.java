@@ -20,8 +20,4 @@ public class SseController {
         return sseEmitterService.createSession();
     }
 
-    @GetMapping("/close")
-    public void closeSession(@RequestParam String clientId) {
-        sseEmitterService.closeSession(clientId);
-    }
 }
