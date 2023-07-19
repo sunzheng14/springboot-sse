@@ -57,8 +57,6 @@ public class SseEmitterServiceImpl implements SseEmitterService {
                     log.error("客户端:{}推送消息失败，原因：{}", k, e.getMessage());
                 }
             });
-
         }
-
      }
 }
