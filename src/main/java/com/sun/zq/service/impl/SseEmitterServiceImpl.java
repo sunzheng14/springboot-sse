@@ -31,8 +31,13 @@ public class SseEmitterServiceImpl implements SseEmitterService {
             log.info("客户端:{}，连接关闭，当前客户端总数为：{}", sseEmitter, SSE_CACHE.size());
         });
 
+        sseEmitter.onTimeout(() -> {
+            SSE_CACHE.remove(sseEmitter);
+            log.info("客户端:{}，连接超时，当前客户端总数为：{}", sseEmitter, SSE_CACHE.size());
+        });
+
         String id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (!SSE_CACHE.containsKey(id)) {
+        if (!SSE_CACHE.containsKey(sseEmitter)) {
             SSE_CACHE.put(sseEmitter, id);
             log.info("客户端:{}，建立连接成功，当前客户端总数为：{}", id, SSE_CACHE.size());
         }
