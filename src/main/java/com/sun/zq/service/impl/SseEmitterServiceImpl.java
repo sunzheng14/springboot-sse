@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SseEmitterServiceImpl implements SseEmitterService {
     private ConcurrentHashMap<SseEmitter, Long> SSE_CACHE = new ConcurrentHashMap<>();
 
-    private   count = 0;
+    private Integer  count = 0;
 
     @Override
     public synchronized SseEmitter  createSession(Long id) {
