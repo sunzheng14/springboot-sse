@@ -16,13 +16,13 @@
 <script>
     var clientId;
     var text;
-    var source = new EventSource('http://localhost:8080/sse/test/start?id=10001');
+    var source = new EventSource('http://localhost:8080/sse/test/start?id=10002');
     source.onmessage = function (event) {
         text = document.getElementById('sse').innerText;
         text = event.data;
         clientId = event.lastEventId;
         console.log("clientId:" + clientId);
-        if (clientId == 10001) {
+        if (clientId == 10002) {
             document.getElementById('sse').innerText = text;
         }
     };

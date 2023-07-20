@@ -12,6 +12,8 @@ public interface SseEmitterService {
      * 创建SseEmitter
      * @return
      */
-    SseEmitter createSession();
+    SseEmitter createSession(Long id);
+
+    void send(Long id, String msg);
 
 }

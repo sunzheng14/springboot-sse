@@ -16,8 +16,13 @@ public class SseController {
     private SseEmitterService sseEmitterService;
 
     @GetMapping("/start")
-    public Object createSession() {
-        return sseEmitterService.createSession();
+    public Object createSession(@RequestParam("id") Long id) {
+        return sseEmitterService.createSession(id);
+    }
+
+    @PostMapping("/send")
+    public void send(@RequestParam("id") Long id, @RequestParam("msg") String msg) {
+        sseEmitterService.send(id, msg);
     }
 
 }
