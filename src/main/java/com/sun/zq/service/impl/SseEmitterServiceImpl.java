@@ -43,7 +43,6 @@ public class SseEmitterServiceImpl implements SseEmitterService {
             SSE_CACHE.put(sseEmitter, id);
             log.info("客户端:{}，建立连接成功，当前客户端总数为：{}", sseEmitter, SSE_CACHE.size());
         }
-
         return sseEmitter;
     }
 
